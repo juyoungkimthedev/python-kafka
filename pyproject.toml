@@ -1,0 +1,69 @@
+[tool.poetry]
+name = "python-kafka"
+version = "0.1.0"
+description = "Playing around with Kafka"
+authors = ["Ju Young Kim <juyoung@primer.io>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = "^1.9.0"
+uvicorn = "^0.17.6"
+jsonschema = "^4.4.0"
+aiohttp = "^3.8.1"
+aiobotocore = "^2.3.3"
+starlette = "^0.20.0"
+python-json-logger = "^2.0.2"
+asyncpg = "^0.25.0"
+python-schema-registry-client = "^2.4.0"
+aiokafka = "^0.7.2"
+
+[tool.poetry.dev-dependencies]
+isort = ">=5.8.0"
+requests = ">=2.25.1"
+mypy = ">=0.960"
+black = ">=22.3.0"
+flake8 = ">=4.0.1"
+pytest = ">=7.1.2"
+pytest-asyncio = ">=0.18.3"
+pytest-cov = ">=3.0.0"
+pytest-spec = ">=3.2.0"
+tox = ">=3.25.0"
+tox-poetry = ">=0.4.1"
+aiosqlite = ">=0.17.0"
+schemathesis = ">=3.15.4"
+pytest-clarity = ">=1.0.1"
+pytest-mock = ">=3.7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310']
+verbose = false
+skip-string-normalization = false
+extend-exclude = "^/alembic"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+filter_files = true
+force_alphabetical_sort_within_sections = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = [ "connect/", ]
+omit = [ "*/tests/*", "src/tests/*", ]
+
+[tool.mypy]
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+mypy_path = ["tests/","connect/"]
+ignore_missing_imports = true
+
+[tool.pydocstyle]
+add-ignore = "D105, D107, D212, D401"
+convention = "google"
+match-dir = "(?!tests).*"
